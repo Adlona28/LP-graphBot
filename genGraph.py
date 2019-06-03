@@ -22,11 +22,9 @@ def getKey(item):
 
 def graph(N, M):
     G = nx.Graph()
-    countNodes = 0
-    c = 0
     for node in N:
         G.add_node(node[4], country=node[0], city=node[1],
-                   lat=node[2], long=node[3])
+                   latitude=node[2], longitude=node[3])
     G.add_edges_from(M)
     return G
 
@@ -47,8 +45,7 @@ def readFile(population):
 
 def genEdges(L, distance):
     A = []
-    i = 0
-    while i < len(L):
+    for i in range (len(L)-1):
         longLimit = coordLimit(distance, L[i][2], L[i][3])
         longActual = L[i][3]
         bandera = False
@@ -56,7 +53,7 @@ def genEdges(L, distance):
             bandera = True
         j = i
         while bandera or longActual <= longLimit:
-            if haversine((L[i][2], L[i][3]), (L[j][2], L[j][3])) <= distance:
+            if L[i][4] != L[j][4] and haversine((L[i][2], L[i][3]), (L[j][2], L[j][3])) <= distance:
                 A.append([L[i][4], L[j][4]])
             longActual = L[j][3]
             j = j + 1
@@ -66,7 +63,6 @@ def genEdges(L, distance):
                     bandera = False
                 else:
                     longActual = 100000.0
-        i = i+1
     return A
 
 
