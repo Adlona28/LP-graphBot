@@ -23,7 +23,8 @@ def drawPop(dist, lat, lon, graph):
     for node in list(G.nodes):
         m.add_marker(CircleMarker((G.nodes[node]['longitude'], G.nodes[node]['latitude']), 'red', max(3, G.nodes[node]['pop'] * 15 / maxPop)))
     image = m.render()
-    image.save('plotpop.png')
+    return image
+    #image.save('plotpop.png')
 
 
 def drawGraph(dist, lat, lon, graph):

@@ -26,7 +26,6 @@ def graph(N, M):
         G.add_node(node[4], country=node[0], city=node[1],
                    latitude=node[2], longitude=node[3], pop=node[5])
     G.add_edges_from(M)
-    print('ja esta el graph')
     return G
 
 
@@ -68,11 +67,8 @@ def genEdges(L, distance):
 
 
 def genGraph(population, distance):
-    print('volen que generi un graph')
     L = readFile(population)
-    print('ja estan els nodes')
     A = genEdges(L, distance)
-    print('ja estan les arestes')
     return graph(L, A)
 
 

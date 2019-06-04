@@ -1,10 +1,13 @@
 import genGraph
 import drawMap
+import networkx as nx
 
 def graph(args):
-	print('recibo la llamada')
-	G = genGraph.genGraph(args[1], args[0])
-	print('generated')
+	G = genGraph.genGraph(int(args[1]), int(args[0]))
 	return G
 
-#graph([300, 100000])
+def components(G):
+	return nx.number_connected_components(G)
+
+def plotpot(dist, lat, lon, G):
+	return drawMap.drawPop(dist, lat, lon, G)
