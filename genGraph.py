@@ -24,8 +24,9 @@ def graph(N, M):
     G = nx.Graph()
     for node in N:
         G.add_node(node[4], country=node[0], city=node[1],
-                   latitude=node[2], longitude=node[3])
+                   latitude=node[2], longitude=node[3], pop=node[5])
     G.add_edges_from(M)
+    print('ja esta el graph')
     return G
 
 
@@ -36,7 +37,7 @@ def readFile(population):
         id = 1
         for row in readCSV:
             if float(row[2]) >= population:
-                L.append([row[0], row[1], float(row[3]), float(row[4]), id])
+                L.append([row[0], row[1], float(row[3]), float(row[4]), id, float(row[2])])
                 id = id+1
     file.close()
     L.sort(key=getKey)
@@ -67,13 +68,14 @@ def genEdges(L, distance):
 
 
 def genGraph(population, distance):
+    print('volen que generi un graph')
     L = readFile(population)
+    print('ja estan els nodes')
     A = genEdges(L, distance)
-    print(len(L))
-    print(len(A))
+    print('ja estan les arestes')
     return graph(L, A)
 
 
-G = genGraph(100000, 300)
-print(G.number_of_nodes())
-print(G.number_of_edges())
+#G = genGraph(100000, 300)
+#print(G.number_of_nodes())
+#print(G.number_of_edges())
