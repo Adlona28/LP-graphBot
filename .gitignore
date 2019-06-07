@@ -1,4 +1,5 @@
-worldCitiesWithPopulation.csv
-worldcities.csv
-token.txt
+*.csv
+*.txt
 *.png
+*.gz
+__pycache__

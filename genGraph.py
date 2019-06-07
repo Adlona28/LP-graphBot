@@ -31,7 +31,7 @@ def graph(N, M):
 
 def readFile(population):
     L = []
-    with open('./worldCitiesWithPopulation.csv') as file:
+    with open('worldCitiesWithPopulation.csv') as file:
         readCSV = csv.reader(file, delimiter=',')
         id = 1
         for row in readCSV:
@@ -70,8 +70,3 @@ def genGraph(population, distance):
     L = readFile(population)
     A = genEdges(L, distance)
     return graph(L, A)
-
-
-#G = genGraph(100000, 300)
-#print(G.number_of_nodes())
-#print(G.number_of_edges())

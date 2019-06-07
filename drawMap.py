@@ -23,8 +23,7 @@ def drawPop(dist, lat, lon, graph):
     for node in list(G.nodes):
         m.add_marker(CircleMarker((G.nodes[node]['longitude'], G.nodes[node]['latitude']), 'red', max(3, G.nodes[node]['pop'] * 15 / maxPop)))
     image = m.render()
-    return image
-    #image.save('plotpop.png')
+    image.save('plotpop.png')
 
 
 def drawGraph(dist, lat, lon, graph):
@@ -47,9 +46,3 @@ def drawRoute(G, path):
         m.add_line(Line(((G.nodes[path[i]]['longitude'], G.nodes[path[i]]['latitude']), (G.nodes[path[i+1]]['longitude'], G.nodes[path[i+1]]['latitude'])), 'blue', 1))
     image = m.render()
     image.save('plotroute.png')    
-
-
-#graph = genGraph.genGraph(100000, 300)
-#drawPop(1000, 41.47, 2.25, graph)
-#drawGraph(1000, 41.47, 2.25, graph)
-#drawRoute(graph, [31,32,33])
