@@ -3,11 +3,13 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import gestorComandes as gcom
 import actualitzaDades as actu
 
+
 def start(bot, update, user_data):
     bot.send_message(chat_id=update.message.chat_id, text="Hola! Actualitzo les dades i comencem")
     actu.comprovaActualitzat()
     bot.send_message(chat_id=update.message.chat_id, text="Som-hi!")
     user_data['graph'] = gcom.graph(["300", "100000"])
+
 
 def help(bot, update):
     infoAuthor = "/author: Per obtenir les dades de l'autor d'aquest bot tan simpàtic\n\t"
@@ -21,8 +23,10 @@ def help(bot, update):
     ajuda = "Aquestes són les comendes que entenc, amb una petita descripció:\n\t"+infoAuthor+infoGraph+infoNodes+infoEdges+infoComponents+infoPlotPop+infoPlotGraph+infoRoute
     bot.send_message(chat_id=update.message.chat_id, text=ajuda)
 
+
 def author(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text="Adrian Lozano Navarro\nadrian.lozano.navarro@est.fib.upc.edu")
+
 
 def graph(bot, update, args, user_data):
     if len(args) != 2:
@@ -40,21 +44,26 @@ def graph(bot, update, args, user_data):
             print(e)
             bot.send_message(chat_id=update.message.chat_id, text='💣')
 
+
 def nodes(bot, update, user_data):
     resposta = str(user_data['graph'].number_of_nodes())
     bot.send_message(chat_id=update.message.chat_id, text=resposta)
+
 
 def edges(bot, update, user_data):
     resposta = str(user_data['graph'].number_of_edges())
     bot.send_message(chat_id=update.message.chat_id, text=resposta)
 
+
 def components(bot, update, user_data):
     resposta = str(gcom.components(user_data['graph']))
     bot.send_message(chat_id=update.message.chat_id, text=resposta)
 
+
 def localitzacio(bot, update, user_data):
     user_data['lat'], user_data['lon'] = update.message.location.latitude, update.message.location.longitude
     bot.send_message(chat_id=update.message.chat_id, text="Rebut, guardo la teva posició")
+
 
 def plotpop(bot, update, args, user_data):
     try:
@@ -65,12 +74,12 @@ def plotpop(bot, update, args, user_data):
 
             else:
                 gcom.plotpot(args[0], user_data['lat'], user_data['lon'], user_data['graph'])
-                bot.send_photo(chat_id=update.message.chat_id, photo = open('plotpop.png', 'rb'))
+                bot.send_photo(chat_id=update.message.chat_id, photo=open('plotpop.png', 'rb'))
 
         elif len(args) == 3:
             print('me da los datos')
             gcom.plotpot(args[0], args[1], args[2], user_data['graph'])
-            bot.send_photo(chat_id=update.message.chat_id, photo = open('plotpop.png', 'rb'))
+            bot.send_photo(chat_id=update.message.chat_id, photo=open('plotpop.png', 'rb'))
 
         else:
             resposta = "Aquesta comanda s'utilitza així: /plotpop dist [lat] [lon]"
@@ -79,6 +88,7 @@ def plotpop(bot, update, args, user_data):
     except Exception as e:
         print(e)
         bot.send_message(chat_id=update.message.chat_id, text='💣')
+
 
 def plotgraph(bot, update, args, user_data):
     try:
@@ -89,11 +99,11 @@ def plotgraph(bot, update, args, user_data):
 
             else:
                 gcom.plotgraph(args[0], user_data['lat'], user_data['lon'], user_data['graph'])
-                bot.send_photo(chat_id=update.message.chat_id, photo = open('plotgraph.png', 'rb'))
+                bot.send_photo(chat_id=update.message.chat_id, photo=open('plotgraph.png', 'rb'))
 
         elif len(args) == 3:
             gcom.plotgraph(args[0], args[1], args[2], user_data['graph'])
-            bot.send_photo(chat_id=update.message.chat_id, photo = open('plotgraph.png', 'rb'))
+            bot.send_photo(chat_id=update.message.chat_id, photo=open('plotgraph.png', 'rb'))
 
         else:
             resposta = "Aquesta comanda s'utilitza així: /plotgraph dist [lat] [lon]"
@@ -103,6 +113,7 @@ def plotgraph(bot, update, args, user_data):
         print(e)
         bot.send_message(chat_id=update.message.chat_id, text='💣')
 
+
 def route(bot, update, args, user_data):
     if len(args) != 4:
         resposta = "Aquesta comanda s'utilitza així: /route |Source city| |Source country code| |Destination city| |Destination country code|"
@@ -110,7 +121,7 @@ def route(bot, update, args, user_data):
     else:
         try:
             gcom.route(args, user_data['graph'])
-            bot.send_photo(chat_id=update.message.chat_id, photo = open('plotroute.png', 'rb'))
+            bot.send_photo(chat_id=update.message.chat_id, photo=open('plotroute.png', 'rb'))
         except Exception as e:
             print(e)
             bot.send_message(chat_id=update.message.chat_id, text='💣')

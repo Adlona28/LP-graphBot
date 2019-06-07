@@ -4,6 +4,7 @@ from haversine import haversine
 import genGraph
 import time
 
+
 def nodesAtDistFrom(dist, lat, lon, graph):
     G = graph.copy()
     maxPop = 0
@@ -45,4 +46,4 @@ def drawRoute(G, path):
         m.add_marker(CircleMarker((G.nodes[path[i+1]]['longitude'], G.nodes[path[i+1]]['latitude']), 'red', 3))
         m.add_line(Line(((G.nodes[path[i]]['longitude'], G.nodes[path[i]]['latitude']), (G.nodes[path[i+1]]['longitude'], G.nodes[path[i+1]]['latitude'])), 'blue', 1))
     image = m.render()
-    image.save('plotroute.png')    
+    image.save('plotroute.png')

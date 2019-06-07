@@ -8,18 +8,22 @@ def graph(args):
     G = genGraph.genGraph(int(args[1]), int(args[0]))
     return G
 
+
 def components(G):
     return nx.number_connected_components(G)
+
 
 def plotpot(dist, lat, lon, G):
     return drawMap.drawPop(float(dist), float(lat), float(lon), G)
 
+
 def plotgraph(dist, lat, lon, G):
     return drawMap.drawGraph(float(dist), float(lat), float(lon), G)
 
+
 def route(args, G):
     L = []
-    for i in range (len(args)):
+    for i in range(len(args)):
         word = ''
         for char in args[i]:
             if char != '"' and char != ',':
@@ -44,5 +48,5 @@ def route(args, G):
             if ratio > ratioNodeDest:
                 nodeDest = node
                 ratioNodeDest = ratio
-    path = nx.shortest_path(G, source = nodeSrc, target = nodeDest)
+    path = nx.shortest_path(G, source=nodeSrc, target=nodeDest)
     return drawMap.drawRoute(G, path)

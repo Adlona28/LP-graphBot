@@ -1,0 +1,6 @@
+python_telegram_bot==11.1.0
+staticmap==0.5.4
+haversine==2.1.1
+networkx==2.3
+fuzzywuzzy==0.17.0
+telegram==0.0.1

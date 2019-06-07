@@ -4,6 +4,7 @@ import csv
 import gzip
 import datetime
 
+
 def comprovaActualitzat():
     if os.path.isfile('ultimaActualitzacio.txt'):
 
@@ -32,9 +33,10 @@ def comprovaActualitzat():
         writeF.close()
         actualitza()
 
+
 def actualitza():
     urllib.request.urlretrieve("https://github.com/jordi-petit/lp-graphbot-2019/blob/master/dades/worldcitiespop.csv.gz?raw=true", "dades.gz")
-    file = gzip.open('dades.gz', mode = 'rt')
+    file = gzip.open('dades.gz', mode='rt')
     readCSV = csv.reader(file, delimiter=',')
 
     with open('worldCitiesWithPopulation.csv', 'w') as newFile:

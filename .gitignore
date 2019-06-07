@@ -1,5 +1,6 @@
 *.csv
-*.txt
+token.txt
+ultimaActualitzacio.txt
 *.png
 *.gz
 __pycache__

@@ -45,7 +45,7 @@ def readFile(population):
 
 def genEdges(L, distance):
     A = []
-    for i in range (len(L)-1):
+    for i in range(len(L)-1):
         longLimit = coordLimit(distance, L[i][2], L[i][3])
         longActual = L[i][3]
         bandera = False
